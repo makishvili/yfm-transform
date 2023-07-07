@@ -23,7 +23,19 @@ function createLinkTokens(state: StateCore, id: string, setId = false) {
     open.attrSet('rel', 'nofollow');
     text.content = '';
 
+<<<<<<< Updated upstream
     return [open, text, close];
+=======
+    // SEO: render invisible heading title because link must have text content.
+    const spanOpen = new state.Token('span_open', 'span', 1);
+    const spanText = new state.Token('text', '', 0);
+    const spanClose = new state.Token('span_close', 'span', -1);
+    spanOpen.attrSet('class', 'visually-hidden');
+    spanText.content = title;
+    spanText.meta = {hidden: true};
+
+    return [open, spanOpen, spanText, spanClose, close];
+>>>>>>> Stashed changes
 }
 
 const getCustomIds = (content: string) => {
